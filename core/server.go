@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"os"
 )
 
 var configPath = "/usr/local/etc/trojan/config.json"
@@ -41,11 +42,13 @@ func Load(path string) *ServerConfig {
 	data, err := ioutil.ReadFile(path)
 	if err != nil {
 		fmt.Println(err)
+		os.Exit(1000)
 		return nil
 	}
 	config := ServerConfig{}
 	if err := json.Unmarshal(data, &config); err != nil {
 		fmt.Println(err)
+		os.Exit(1001)
 		return nil
 	}
 	return &config
