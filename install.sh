@@ -103,16 +103,16 @@ checkSys() {
     fi
 
     # 缺失/usr/local/bin路径时自动添加
-    [[ -z `echo $PATH|grep /usr/local/bin` ]] && { echo 'export PATH=$PATH:/usr/local/bin' >> /etc/profile; source /etc/profile; }
+    [[ -z `echo $PATH|grep /usr/local/bin` ]] && { echo 'export PATH=$PATH:/usr/local/bin' >> /etc/bashrc; source /etc/bashrc; }
 }
 
 #安装依赖
 installDependent(){
     if [[ ${PACKAGE_MANAGER} == 'dnf' || ${PACKAGE_MANAGER} == 'yum' ]];then
-        ${PACKAGE_MANAGER} install socat bash-completion -y
+        ${PACKAGE_MANAGER} install socat crontabs bash-completion -y
     else
         ${PACKAGE_MANAGER} update
-        ${PACKAGE_MANAGER} install socat bash-completion xz-utils -y
+        ${PACKAGE_MANAGER} install socat cron bash-completion xz-utils -y
     fi
 }
 
